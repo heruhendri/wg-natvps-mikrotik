@@ -1,0 +1,11 @@
+[Interface]
+Address = 10.9.0.1/24
+ListenPort = 51820
+PrivateKey = <ISI_KUNCI_PRIVATE_VPS>
+
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o venet0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o venet0 -j MASQUERADE
+
+[Peer]
+PublicKey = <ISI_KUNCI_PUBLIK_MIKROTIK>
+AllowedIPs = 10.9.0.2/32, 192.168.88.0/24
